@@ -1,0 +1,36 @@
+package com.example.module9;
+
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+import java.util.Map;
+
+public class WordOccurrencesGUITest {
+    private WordOccurrencesGUI wordOccurrencesGUI;
+
+    @BeforeEach
+    public void setup() {
+        wordOccurrencesGUI = new WordOccurrencesGUI();
+        // Initialize the textArea field
+        wordOccurrencesGUI.textArea = new TextArea();
+    }
+
+    @Test
+    public void testAnalyzeText() {
+        // Set up test input
+        String inputText = "Hello world hello";
+
+        // Set the text in the text area
+        wordOccurrencesGUI.textArea.setText(inputText);
+
+        // Call the analyzeText() method
+        wordOccurrencesGUI.analyzeText();
+
+        // Get the word frequencies from the GUI
+        Map<String, Integer> wordFrequencies = wordOccurrencesGUI.getWordFrequencies();
+
+        // Verify the word frequencies are as expected
+        Assertions.assertEquals(2, wordFrequencies.get("hello"));
+        Assertions.assertEquals(1, wordFrequencies.get("world"));
+    }
+}
